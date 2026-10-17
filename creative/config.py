@@ -54,3 +54,36 @@ SFX_CHAT_MESSAGE = SFX_DIR / "chat_message.wav"
 # Python Environments
 MUSICGEN_PYTHON = MOTION_DIR / "scripts/musicgen/venv/bin/python3"
 
+# Platform safe zones for 1080x1920: Reels/TikTok UI covers the bottom ~35% and the right-side
+# button column. Keep subtitles and key text inside: top 14%, bottom 35%, sides >= 6%.
+SAFE_TOP_PX = 270
+SAFE_BOTTOM_PX = 672
+SAFE_SIDE_PX = 120
+
+# Export presets (width, height). 9:16 is the master; 4:5 for feed placements.
+EXPORT_PRESETS = {
+    "9x16": (1080, 1920),
+    "4x5": (1080, 1350),
+    "1x1": (1080, 1080),
+}
+
+# Paid generation list prices, USD per second of output (verified on the providers' pricing
+# pages, 2026-10). Used by estimate_cost() for the confirm-before-spending rule.
+GENERATION_PRICES_USD_PER_S = {
+    "gemini_omni_720p": 0.10,        # Google AI Studio direct
+    "gemini_omni_1080p": 0.15,
+    "runway_act_two": 0.05,          # Runway Dev API, 5 credits/s at $0.01
+    "runway_app_performance": 0.27,  # Runway web app, ~17 credits/s with Pro credits
+    "kling_motion_720p": 0.126,      # Kling API and comfy.org (same list price)
+    "kling_motion_1080p": 0.168,
+    "runway_aleph2": 0.28,
+}
+IMAGE_PRICES_USD = {"nano_banana_1k": 0.034, "nano_banana_2k": 0.05, "nano_banana_4k": 0.113}
+COST_CONFIRM_THRESHOLD_USD = 1.00
+
+
+def estimate_cost(model: str, seconds: float = 0.0, images: int = 0) -> float:
+    if model in IMAGE_PRICES_USD:
+        return round(IMAGE_PRICES_USD[model] * images, 3)
+    return round(GENERATION_PRICES_USD_PER_S[model] * seconds, 3)
+

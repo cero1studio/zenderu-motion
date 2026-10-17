@@ -1,0 +1,37 @@
+{
+  "1": {
+    "class_type": "LoadVideo",
+    "inputs": {
+      "file": "INPUT_CLIP.mp4"
+    }
+  },
+  "2": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "office_plate.png"
+    }
+  },
+  "3": {
+    "class_type": "GeminiOmniVideoGenerator",
+    "inputs": {
+      "prompt": "Replace the background behind the man with the office shown in <IMAGE_REF_0>. Keep his face, identity, lip movements, voice and audio exactly the same. Keep the original audio track and its timing completely untouched. Keep everything else the same.",
+      "model": "gemini-omni-1.1-flash",
+      "task_type": "edit",
+      "resolution": "720p",
+      "aspect_ratio": "9:16",
+      "seed": 0,
+      "max_wait_minutes": 10.0,
+      "api_key": "",
+      "temperature": 1.0,
+      "top_p": 0.95,
+      "images": [
+        "2",
+        0
+      ],
+      "video_1": [
+        "1",
+        0
+      ]
+    }
+  }
+}

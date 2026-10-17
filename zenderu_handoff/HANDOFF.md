@@ -1,7 +1,11 @@
 # Traspaso: Zenderu + ComfyUI en Railway
 
 Resumen para continuar el trabajo en otro agente (Antigravity). **No contiene claves**: las API keys
-viven como variables en Railway y no se deben pegar en chats ni en archivos.
+viven como variables en Railway o en `.env` (ver `.env.example`) y no se deben pegar en chats ni en archivos.
+
+**Dónde vive todo ahora (2026-10-16):** repo `zenderu-motion` (`github.com/cero1studio/zenderu-motion`),
+separado de la web (`Zenderuweb`). Contexto para agentes: `AGENTS.md`. Manual operativo: `creative/README.md`.
+Arquitectura: `CREATIVE-PIPELINE.md`. Los scripts de `tools/` son la versión de trabajo de los de `creative/clips/`.
 
 ---
 
@@ -90,7 +94,13 @@ El MCP de Runway (`https://mcp.runwayml.com/mcp`) pidió plan Enterprise en la c
 consulta con `GET /tasks?task_ids=`. Motion Control cuesta USD 0,126/s a 720p (mismo precio de lista
 que comfy.org, así que no conviene un nodo directo salvo descuentos por paquete).
 
-## 4. Herramientas (`tools/`)
+## 4. Prompts y herramientas
+
+**`PROMPTS.md`**: los 43 prompts que se mandaron a Gemini (imagen y video), completos y por proyecto:
+el anuncio conceptual (el que más rindió), el realista de privacidad, el cinematográfico de la pareja
+y los de Anselmo. Para una campaña conceptual nueva, partir de la sección 1.
+
+### Herramientas (`tools/`)
 
 | Script | Qué hace |
 |---|---|
@@ -148,14 +158,15 @@ consulta transformadora." · "Ven, te espero."
 1. **Runway:** el usuario genera los videos 2 y 3 (cada uno con su foto). Después hay que unir los 3
    resultados en un solo video vertical con su voz original (el audio ya está dentro de cada video de
    actuación). Disimular con fundidos los saltos de los cortes internos.
-2. **Campaña "Te responde. No te escucha."** (gente que usa la IA como psicólogo), **en versión conceptual**:
+2. **Campaña "Te responde. No te escucha."** — ya es la plantilla `creative/templates/ad_09_ia_responde_no_escucha.json`, **en versión conceptual**:
    figura morada + ventana de chat azul fría → muro de respuestas → apagón → nace una Guía de luz verde
    → camino verde de Zenderu. Empezar por 3 imágenes clave con Nano Banana usando `bg_zenderu`/`guide_hero`
    como referencia, pedir aprobación, y después video de prueba a 720p. En anuncios pagos no nombrar
    "ChatGPT", no prometer terapia y agregar una línea de crisis en la descripción.
-3. Arreglar el bug de descarga por URI en `gemini_omni_direct` (§2).
+3. Arreglar el bug de descarga por URI en `gemini_omni_direct` (§2), en el repo `comfyui-railway`.
 4. **Rotar `GOOGLE_API_KEY`:** quedó expuesta en logs y errores durante la sesión. Rotarla en AI Studio
    y actualizarla en Railway.
 5. Antiguo, en pausa: anuncio cinematográfico "pro" (pareja que discute → escalera → app → camino
    verde) hecho con cadena de `extend`. Los archivos intermedios estaban en la carpeta temporal y
    probablemente se perdieron. Si se retoma, rehacer en estilo conceptual.
+6. Generar la hoja de referencia del personaje (`creative/PERSONAJE.md`) y llenar `creative/RESULTADOS.md` con métricas reales.

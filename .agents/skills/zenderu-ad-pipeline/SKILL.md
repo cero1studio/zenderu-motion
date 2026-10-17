@@ -1,15 +1,23 @@
 ---
 name: zenderu-ad-pipeline
-description: Pipeline maestro y generador de anuncios de alto rendimiento para Zenderu (Inner Tech). Define los 8 templates oficiales (AD_01 a AD_08), generación de imágenes conceptuales 3D con Nano Banana (Gemini 3.1 Flash Image), generación/edición de video con ComfyUI (Railway), y postproducción automatizada (recorte, estabilización, subtítulos quemados en #62D177, cortinillas oficiales de intro/outro y masterización -16 LUFS).
+description: Pipeline maestro y generador de anuncios de alto rendimiento para Zenderu (Inner Tech). Define los templates oficiales (AD_01 a AD_09), generación de imágenes conceptuales 3D con Nano Banana (Gemini 3.1 Flash Image), generación/edición de video con ComfyUI (Railway), y postproducción automatizada (recorte, estabilización, subtítulos en #62D177, cortinillas oficiales de intro/outro y masterización -16 LUFS).
 ---
 
 # 🎬 Zenderu Ad Production Pipeline (Inner Tech)
 
 Manual operativo para la creación, generación y postproducción automatizada de anuncios de video para Zenderu.
 
+## Reglas que se aplican siempre
+
+1. **Conceptual primero.** Lo conceptual (figura morada sin rostro + camino verde, AD_02/AD_05/AD_09) rinde mucho más que lo realista. Ver `creative/RESULTADOS.md`.
+2. **Ahorro de créditos.** Cerrar requisitos y revisar insumos → cotizar con `python3 creative/generator.py --estimate <modelo> <segundos>` → 1 prueba → aprobación del usuario → resto, de a 1–2 por vez. 720p por defecto.
+3. **Personaje consistente:** `creative/PERSONAJE.md`. Editar, no regenerar. Guion, planos y animación paso a paso: `creative/GUION_Y_ANIMACION.md`.
+4. **Antes de publicar:** `creative/CHECKLIST_PAUTA.md`. Sin marcas ajenas, sin prometer terapia, con línea de crisis, con consentimiento para voces y caras reales.
+5. **Nunca** escribir claves en archivos ni en el chat: van en `.env` (ver `.env.example`) o en las variables de Railway.
+
 ---
 
-## 🏛️ Los 8 Formatos Oficiales Aprobados
+## 🏛️ Formatos Oficiales Aprobados
 
 | ID | Nombre | Formato Visual | Enfoque / Arquetipo |
 |---|---|---|---|
@@ -21,6 +29,7 @@ Manual operativo para la creación, generación y postproducción automatizada d
 | **AD_06** | AI vs Guía Humano | Pantalla dividida (IA robótica vs Guía) | Empatía humana real vs respuestas algorítmicas frías |
 | **AD_07** | Anselmo Quantum Quote | Anselmo a cámara en estudio cálido | Algoritmo de decisiones, arquetipos (NUNCA tarot) |
 | **AD_08** | Anselmo Emocional Quote | Anselmo primer plano cinematográfico | Claridad psicológica profunda y reencuadre vital |
+| **AD_09** | IA Responde, No Escucha | Conceptual: ventana de chat azul fría → Guía de luz verde → camino | Compañía real vs respuesta sintética (versión conceptual de AD_06, sin producir) |
 
 ---
 
@@ -38,10 +47,13 @@ Para los anuncios conceptuales y fondos de video:
 ## ⚡ Generación de Video con ComfyUI (Railway)
 
 - Conexión vía Railway CLI: `railway ssh` en el proyecto `selfless-bravery` o vía API HTTP en `https://comfyui-production-52d3.up.railway.app`.
-- Nodos personalizados:
-  - `gemini_omni_direct`: Edición y generación de clips de hasta 10s con Gemini Omni Flash vía AI Studio.
-  - `Kling Motion Control`: Transferencia de movimiento de video guía a imagen fija.
-  - `Runway Act-Two`: Transferencia de actuación facial y corporal.
+- Nodos:
+  - `gemini_omni_direct` (propio): edición y generación de clips de hasta 10 s con Gemini Omni Flash, cobrado a `GOOGLE_API_KEY`.
+  - `gemini_image_direct` (propio): Nano Banana, cobrado a `GOOGLE_API_KEY`.
+  - `Kling Motion Control` (nativo, partner): transferencia de movimiento de un video guía a una imagen fija. Cobra créditos de comfy.org (`COMFY_ORG_API_KEY`).
+- **Runway Act-Two NO es un nodo de ComfyUI**: se usa en la web de Runway (~17 créditos/s) o por su API de desarrollador (`POST /v1/character_performance`, USD 0,05/s, 3–30 s por clip).
+- Workflows listos en formato API: `creative/comfyui/workflows/` (ver su README).
+- Límites de Omni: `edit` no cambia la proporción, no edita voz ni acepta referencias de audio, no acepta imágenes de personas reconocibles, y re-locuta el audio (usar `clips/align2.py` para volver a poner la voz original).
 
 ---
 
@@ -56,7 +68,7 @@ Para los anuncios conceptuales y fondos de video:
 
 ### 3. Subtítulos Sociales Quemados
 - Generados con `creative/clips/subtitles.py` en formato `.ass`.
-- Ubicados en el tercio inferior (y ~ 75%).
+- Abajo y al centro, por encima de la zona que tapa la interfaz de Reels/TikTok (`config.SAFE_BOTTOM_PX` = 672 px, márgenes laterales de 120 px). Quemarlos requiere ffmpeg con libass, que la Mac del estudio no tiene: usar Remotion.
 - Tipografía Poppins bold en blanco con palabras clave resaltadas en verde menta neón (`#62D177`) y sombra oscura para contraste sobre cualquier fondo.
 
 ### 4. Cortinillas Oficiales de Marca
@@ -74,7 +86,7 @@ Para los anuncios conceptuales y fondos de video:
 ## 💻 Comandos Principales de la Suite
 
 ```bash
-# 1. Ver catálogo de los 8 templates
+# 1. Ver catálogo de templates
 python3 creative/generator.py --list
 
 # 2. Ver guión, hooks y prompts de un template específico

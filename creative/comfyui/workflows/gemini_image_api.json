@@ -1,0 +1,34 @@
+{
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "bg_zenderu.png"
+    }
+  },
+  "2": {
+    "class_type": "GeminiImageGenerator",
+    "inputs": {
+      "prompt": "In the exact same illustration style, material and color palette as the reference image (smooth matte translucent purple-indigo gradient humanoid figure #252151, no facial features, deep navy-black starry background #06011A, glowing mint-green accents #62D177): <ESCENA>. Vertical 9:16 composition, generous negative space at the top. No text, no logos, no UI, no realistic humans.",
+      "model": "gemini-3.1-flash-image",
+      "resolution": "2K",
+      "aspect_ratio": "9:16",
+      "thinking_level": "high",
+      "seed": 0,
+      "api_key": "",
+      "reference_images": [
+        "1",
+        0
+      ]
+    }
+  },
+  "3": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "2",
+        0
+      ],
+      "filename_prefix": "zenderu/img"
+    }
+  }
+}

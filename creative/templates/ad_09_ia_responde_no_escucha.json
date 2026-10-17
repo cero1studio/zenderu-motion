@@ -1,0 +1,56 @@
+{
+  "id": "AD_09",
+  "name": "IA Responde, No Escucha (Conceptual)",
+  "archetype": "Respuesta Sintética vs Compañía Real",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 28,
+  "style": "conceptual_matte_purple_neon",
+  "status": "guion aprobado, sin producir",
+  "why": "Versión conceptual de AD_06. Lo conceptual (AD_02/AD_05) rinde mucho más que lo realista; ver RESULTADOS.md.",
+  "hook": "Le preguntaste todo… y te respondió todo.",
+  "hook_variants": [
+    "Le conté mi ruptura a un chat… y me mandó una lista con viñetas.",
+    "¿Cuándo fue la última vez que una persona, y no una app, te preguntó cómo estás?",
+    "Tu IA sabe todo. Menos lo que se siente."
+  ],
+  "epiphany": "Pero seguías solo. Hay cosas que no se responden… se acompañan.",
+  "cta": "Habla con un Guía Zenderu real. ¡5 Minutos Gratis en tu primera consulta!",
+  "voiceover": [
+    {"t": "4-9s", "text": "Le preguntaste todo…"},
+    {"t": "9-13s", "text": "…y te respondió todo."},
+    {"t": "13-16s", "text": "Pero seguías solo."},
+    {"t": "16-21s", "text": "Hay cosas que no se responden…"},
+    {"t": "21-26s", "text": "…se acompañan."}
+  ],
+  "visual_treatment": {
+    "background": "#0f0c21 / #06011a con estrellas sutiles",
+    "character": "Figura morada mate sin rostro #252151 (ver PERSONAJE.md)",
+    "cold_element": "Ventana de chat genérica de luz azul fría, globos con líneas geométricas ilegibles, SIN marca",
+    "warm_element": "Guía de luz verde menta #62d177 que se vuelve el camino curvo de Zenderu",
+    "text_color": "#ffffff and #a5a2c4"
+  },
+  "nano_banana_prompts": {
+    "scene_1_ventana_fria": "In the exact same illustration style, material and color palette as the reference images (smooth matte translucent purple-indigo gradient humanoid figure #252151, no facial features, deep navy-black starry background #06011A): the figure sits on the ground hugging its knees, lit only by a floating cold blue rectangular chat window in front of it, with abstract unreadable geometric message bubbles. No logos, no readable text, no brand UI. Vertical 9:16, generous negative space at the top.",
+    "scene_2_muro_respuestas": "Same character, same style: dozens of cold blue-white message bubbles stack up into a tall wall that almost hides the small sitting figure; the figure looks smaller and further away. No readable text, no logos. Vertical 9:16.",
+    "scene_3_guia_verde": "Same character, same style: the blue light is gone; behind the figure a warm glowing mint-green #62D177 humanoid light figure (the Guide) sits beside it, and the green light stretches into the curving Zenderu green brick path leading forward. Vertical 9:16, negative space at the top."
+  },
+  "omni_prompts": {
+    "shot_1": "<FIRST_FRAME> Animate this exact image, 6 seconds, single continuous shot, no cuts. Keep the illustration style, character and colors identical. Message bubbles slide out of the blue window one after another, quickly. Slow subtle push-in. Sound: soft digital hum and quiet message pops. No dialogue.",
+    "shot_2": "<FIRST_FRAME> Animate this exact image, 6 seconds, single continuous shot. The wall of bubbles keeps growing; then the blue light flickers and goes out into near darkness. Sound: hum fades to silence. No dialogue.",
+    "shot_3": "<FIRST_FRAME> Animate this exact image, 8 seconds, single continuous shot. The bubbles dissolve into tiny particles; the green Guide light glows warmer; both figures stand up and start walking together along the curving green path. Gentle forward camera move. Sound: warm soft ambient tone. No dialogue."
+  },
+  "production": [
+    {"model": "nano_banana_2k", "images": 3},
+    {"model": "gemini_omni_720p", "seconds": 20}
+  ],
+  "compliance": [
+    "No nombrar ChatGPT ni otra marca: decir 'un chat de IA' y usar una interfaz genérica",
+    "No prometer terapia: guía, acompañamiento, escucha",
+    "Descripción del anuncio con línea de crisis (ver CHECKLIST_PAUTA.md)"
+  ],
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

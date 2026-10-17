@@ -1,15 +1,25 @@
 """
 Zenderu Subtitle & Typography Engine
 Generates and burns high-retention social subtitles (TikTok/Reels format):
-- Centered at lower-third (y ~ 75%)
+- Bottom-centered, just above the Reels/TikTok UI safe zone (config.SAFE_BOTTOM_PX / SAFE_SIDE_PX)
 - Clean Poppins / Inter bold font
 - Base text in bright white, active keywords highlighted in Neon Mint (#62D177)
 - Subtle deep purple/black drop shadow & outline for legibility over any background
+
+Burning needs an ffmpeg built with libass (the `ass` filter). The Homebrew ffmpeg on the
+studio Mac does not have it; burn captions in Remotion instead, or use an ffmpeg with libass.
 """
 
 import subprocess
+import sys
 from pathlib import Path
 from typing import List, Dict, Any
+
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from creative.config import SAFE_BOTTOM_PX, SAFE_SIDE_PX
 
 def create_ass_subtitles(
     segments: List[Dict[str, Any]],
@@ -17,7 +27,9 @@ def create_ass_subtitles(
     font_name: str = "Poppins",
     font_size: int = 56,
     highlight_color_bgr: str = "62D177", # BGR: &H0077D162
-    primary_color_bgr: str = "FFFFFF"    # BGR: &H00FFFFFF
+    primary_color_bgr: str = "FFFFFF",   # BGR: &H00FFFFFF
+    margin_v: int = SAFE_BOTTOM_PX,
+    margin_h: int = SAFE_SIDE_PX,
 ):
     """
     Generates an Advanced SubStation Alpha (.ass) file with Zenderu styling.
@@ -33,8 +45,8 @@ PlayResY: 1920
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,{font_name},{font_size},&H00{primary_color_bgr},&H000000FF,&H00120C0F,&H80000000,1,0,0,0,100,100,1,0,1,5,3,2,60,60,420,1
-Style: Highlight,{font_name},{font_size + 4},&H0077D162,&H000000FF,&H00120C0F,&H80000000,1,0,0,0,100,100,1,0,1,6,4,2,60,60,420,1
+Style: Default,{font_name},{font_size},&H00{primary_color_bgr},&H000000FF,&H00120C0F,&H80000000,1,0,0,0,100,100,1,0,1,5,3,2,{margin_h},{margin_h},{margin_v},1
+Style: Highlight,{font_name},{font_size + 4},&H0077D162,&H000000FF,&H00120C0F,&H80000000,1,0,0,0,100,100,1,0,1,6,4,2,{margin_h},{margin_h},{margin_v},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
@@ -66,6 +78,9 @@ def burn_subtitles_into_video(input_video: str, ass_path: str, output_video: str
     """
     Burns .ass subtitles into the video stream with FFmpeg.
     """
+    filters = subprocess.run(["ffmpeg", "-hide_banner", "-filters"], capture_output=True, text=True).stdout
+    if not any(line.split()[1:2] == ["ass"] for line in filters.splitlines()):
+        raise RuntimeError("This ffmpeg has no libass ('ass' filter): burn the captions in Remotion or use an ffmpeg built with libass.")
     cmd = [
         "ffmpeg", "-y",
         "-i", str(input_video),

@@ -18,18 +18,69 @@ import { PromoSuper } from "./PromoSuper";
 import { FullAd } from "./FullAd";
 import { DynamicAd } from "./DynamicAd";
 import { UGCAd } from "./UGCAd";
-import { AIVsHumanAd } from "./AIVsHumanAd";
 import { ConceptAd } from "./ConceptAd";
 import { PrivateConsultAd, PRIVATE_AD_DURATION } from "./PrivateConsultAd";
+
 import { ExpertAd } from "./ExpertAd";
 import { ExpertAdMoons } from "./ExpertAdMoons";
 import { UGCWhatsappAd } from "./UGCWhatsappAd";
 import { UGCSearchContactAd } from "./UGCSearchContactAd";
+import { ChatAd } from "./ChatAd";
+import { ExpertBumper } from "./ExpertBumper";
+import { KineticTextQuoteAd } from "./KineticTextQuoteAd";
 
 export const RemotionRoot: React.FC = () => {
 
   return (
     <>
+      {/* 🚀 COMPOSICIONES MODULARES REUTILIZABLES */}
+      <Composition
+        id="ChatAdReusable"
+        component={ChatAd}
+        durationInFrames={500}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          guideName: "Guía Anselmo",
+          guideFocus: "Decodificación de Patrones",
+          avatarFile: "carmen_miniatura_1.jpg",
+          zensBalance: 45.0,
+          includeOutro: true,
+        }}
+      />
+      <Composition
+        id="ExpertBumperReusable"
+        component={ExpertBumper}
+        durationInFrames={180}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          guideName: "Guía Anselmo",
+          guideSpecialty: "Decodificación de Patrones",
+          badgeText: "Guía Zenderu Oficial",
+          avatarFile: "carmen_miniatura_1.jpg",
+          top: 220,
+        }}
+      />
+      <Composition
+        id="KineticTextQuoteAdReusable"
+        component={KineticTextQuoteAd}
+        durationInFrames={420}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{
+          categoryPill: "✦ REENCUADRE CONSCIENTE",
+          authorName: "Guía Anselmo",
+          authorSpecialty: "Decodificación de Patrones & Vida",
+          avatarFile: "carmen_miniatura_1.jpg",
+          includeOutro: true,
+        }}
+      />
+
+
                         <Composition
         id="ZenderuIntroOfficial"
         component={IntroStandalone}

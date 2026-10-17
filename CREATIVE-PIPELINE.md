@@ -26,9 +26,9 @@ Zenderu NO es un sitio de esoterismo tradicional, brujería, videncia o adivinac
 
 ---
 
-## 📐 2. Catálogo Maestro de los 8 Templates Publicitarios
+## 📐 2. Catálogo Maestro de Templates Publicitarios
 
-Todos los guiones y metadatos residen en [`creative/templates/`](file:///Users/javiermayorga/Documents/repos/zenderu/Zenderuweb/creative/templates/) y se ejecutan con [`creative/generator.py`](file:///Users/javiermayorga/Documents/repos/zenderu/Zenderuweb/creative/generator.py).
+Todos los guiones y metadatos residen en [`creative/templates/`](creative/templates/) y se ejecutan con [`creative/generator.py`](creative/generator.py).
 
 | ID | Nombre del Template | Formato Visual | Hook Psicológico | Solución & CTA |
 |---|---|---|---|---|
@@ -40,12 +40,26 @@ Todos los guiones y metadatos residen en [`creative/templates/`](file:///Users/j
 | **AD_06** | AI vs Guía Humano | Pantalla dividida (IA robótica vs Guía) | *"La IA analiza datos fríos, pero no entiende tu alma."* | Empatía humana real vs respuestas algorítmicas sin corazón. |
 | **AD_07** | Anselmo Quantum Quote | Anselmo en estudio sobrio a cámara | *"Tu vida no está trabada, tu algoritmo de decisiones sí."* | Decodificación arquetípica de patrones. |
 | **AD_08** | Anselmo Emocional Quote | Anselmo en primer plano cinematográfico | *"Dejar ir no es perder, es recuperar el espacio para elegir."* | Confrontación serena y reencuadre existencial. |
+| **AD_09** | IA Responde, No Escucha | Conceptual: figura morada + ventana de chat azul fría → Guía de luz verde | *"Le preguntaste todo… y te respondió todo."* | Compañía real vs respuesta sintética. Versión conceptual de AD_06 (sin producir). |
+
+> **Aprendizaje clave (ver [`creative/RESULTADOS.md`](creative/RESULTADOS.md)):** los formatos conceptuales (AD_02, AD_05) rinden mucho más que los realistas (UGC, Anselmo con IA). Producir primero en conceptual.
+
+---
+
+## 🧭 2.1 Documentos operativos
+
+* [`creative/RESULTADOS.md`](creative/RESULTADOS.md): rendimiento por anuncio y aprendizajes.
+* [`creative/PERSONAJE.md`](creative/PERSONAJE.md): biblia del personaje conceptual y la Guía verde.
+* [`creative/GUION_Y_ANIMACION.md`](creative/GUION_Y_ANIMACION.md): método de guion, planos, edición y animación de personajes.
+* [`creative/CHECKLIST_PAUTA.md`](creative/CHECKLIST_PAUTA.md): revisión antes de publicar.
+* [`creative/comfyui/workflows/README.md`](creative/comfyui/workflows/README.md): workflows de ComfyUI en formato API.
+* [`zenderu_handoff/HANDOFF.md`](zenderu_handoff/HANDOFF.md): historia técnica, límites de cada API y pendientes.
 
 ---
 
 ## 🎨 3. Especificación de Prompts para Generación de Imágenes (Nano Banana)
 
-La biblioteca completa de prompts probados vive en [`creative/PROMPTS.md`](file:///Users/javiermayorga/Documents/repos/zenderu/Zenderuweb/creative/PROMPTS.md) y se consume vía [`creative/images/generate_image.py`](file:///Users/javiermayorga/Documents/repos/zenderu/Zenderuweb/creative/images/generate_image.py).
+La biblioteca completa de prompts probados vive en [`creative/PROMPTS.md`](creative/PROMPTS.md) y se consume vía [`creative/images/generate_image.py`](creative/images/generate_image.py).
 
 ### Reglas Clave de Generación
 1. **Vertical 9:16 (1080x1920):** Siempre especificar composición vertical con espacio negativo superior para textos y subtítulos.
@@ -67,7 +81,7 @@ La biblioteca completa de prompts probados vive en [`creative/PROMPTS.md`](file:
 
 ## ☁️ 4. Infraestructura ComfyUI en Railway (`selfless-bravery`)
 
-* **Servicio:** `comfyui` en Railway (`https://comfyui-production-52d3.up.railway.app`).
+* **Servicio:** `comfyui` en Railway (`https://comfyui-production-52d3.up.railway.app`), cuenta `cero1studio@gmail.com`, proyecto `selfless-bravery`. Solo CPU; `/app/input` y `/app/output` se borran en cada deploy.
 * **Protocolos:**
   1. **HTTP REST API:** `creative/comfyui/client.py` para encolar `/prompt`, revisar `/history` y descargar `/view`.
   2. **Túnel SSH Directo:** `creative/comfyui/remote_ssh.py` para monitoreo de estado, inspección en vivo de `/app/output`, ejecución remota y descarga de clips generados.
@@ -82,7 +96,7 @@ La biblioteca completa de prompts probados vive en [`creative/PROMPTS.md`](file:
 
 ## 📱 5. Studio de HTML Motion (Mockups 9:16 para Video)
 
-Ubicado en [`creative/html_motion/`](file:///Users/javiermayorga/Documents/repos/zenderu/Zenderuweb/creative/html_motion/). Permite renderizar y capturar animaciones web en vertical 1080x1920 con fidelidad perfecta al diseño de Zenderu.
+Ubicado en [`creative/html_motion/`](creative/html_motion/). Permite renderizar y capturar animaciones web en vertical 1080x1920 con fidelidad perfecta al diseño de Zenderu.
 
 * **Servidor interactivo:** `python3 creative/html_motion/preview.py` (abre en `http://localhost:3333`).
 * **Plantillas:**
@@ -112,5 +126,4 @@ python3 creative/assemble_ad.py ruta/a/clip_cuerpo.mp4 -o final_ad.mp4
 Este script:
 1. Normaliza el audio a -16 LUFS EBU R128.
 2. Une el cuerpo con el Outro oficial de 6s.
-3. Quema subtítulos `.ass` con tipografía legible y palabras clave en verde menta neón (`#62D177`).
-4. Sincroniza el resultado final automáticamente a Google Drive (`Mi unidad/Zenderu_Marketing_Ads`) y a `~/Downloads`.
+3. Sincroniza el resultado final automáticamente a Google Drive (`Mi unidad/Zenderu_Marketing_Ads`) y a `~/Downloads`.
