@@ -3,10 +3,9 @@ import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } fr
 
 export const LowerThird: React.FC<{
   name?: string;
-  /** El ENFOQUE del Guía ("Decodificación de símbolos"), no "Guía Zenderu" genérico — regla de
-   * storytelling del proyecto: mostrar el enfoque/herramientas, nunca una etiqueta de relleno. */
   title?: string;
-}> = ({ name = "Anselmo Cuántico", title = "Decodificación de símbolos" }) => {
+  top?: number;
+}> = ({ name = "Anselmo Cuántico", title = "Decodificación de símbolos", top = 220 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -40,16 +39,10 @@ export const LowerThird: React.FC<{
   const xPos = interpolate(slideIn, [0, 1], [-1000, 0]) + interpolate(slideOut, [0, 1], [0, -1000]);
 
   return (
-    // Fondo TRANSPARENTE de verdad (no chroma green): quitar un chroma a mano en edición se come
-    // parte del verde de marca de la tarjeta de abajo. `AbsoluteFill` sin `backgroundColor` es
-    // transparente; para que la transparencia SALGA en el archivo exportado, renderizar con un
-    // códec con canal alfa real, nunca H.264 (que la pintaría negro):
-    //   npx remotion render src/index.ts ZenderuLowerThird out/lower-third.mov --codec=prores --prores-profile=4444
-    // (o --codec=vp8/vp9 para .webm con alfa, si el editor lo prefiere)
     <AbsoluteFill style={{ fontFamily: "'Poppins', sans-serif" }}>
       <div style={{
         position: "absolute",
-        bottom: 480, // Subido para evitar los captions y el UI de TikTok/Reels
+        top: top, // Prop configurable para evitar tapar caras
         left: 60,
         transform: `translateX(${xPos}px)`,
         display: "flex",
@@ -58,7 +51,7 @@ export const LowerThird: React.FC<{
         padding: "40px 75px",
         borderRadius: "0px 35px 35px 0px",
         boxShadow: "0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(98, 209, 119, 0.15)",
-        borderLeft: "16px solid #62d177", // Borde más grueso
+        borderLeft: "16px solid #62d177",
       }}>
         
         <div style={{ display: "flex", flexDirection: "column" }}>

@@ -1,0 +1,20 @@
+{
+  "id": "AD_06",
+  "name": "AI vs Guía Humano",
+  "archetype": "Empatía Real vs Respuestas Sintéticas",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 16.5,
+  "style": "split_screen_comparison",
+  "hook": "Le pediste consejo a una inteligencia artificial... y te dio una lista genérica que no resolvió nada.",
+  "epiphany": "Los algoritmos calculan probabilidades; un Guía Zenderu conecta con tu historia, tu energía y tu intuición.",
+  "cta": "La verdadera empatía no se programa. Habla en vivo con un Guía. ¡5 Minutos Gratis!",
+  "visual_treatment": {
+    "left_side": "Cold robotic synthetic text typing out mechanical bullet points, desaturated gray",
+    "right_side": "Warm, engaging human guide in live call, intuitive eye contact, #62d177 vibrant green glow"
+  },
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

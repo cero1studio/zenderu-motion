@@ -8,7 +8,7 @@ export const Outro: React.FC = () => {
 
   React.useEffect(() => {
     const link = document.createElement("link");
-    link.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap";
+    link.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap";
     link.rel = "stylesheet";
     document.head.appendChild(link);
     return () => {
@@ -16,119 +16,188 @@ export const Outro: React.FC = () => {
     };
   }, []);
 
-  const contentOpacity = interpolate(frame, [15, 35], [0, 1], { extrapolateRight: "clamp" });
-  const contentY = interpolate(frame, [15, 35], [20, 0], { extrapolateRight: "clamp" });
+  // ==========================================
+  // 1. Wipe In (Frames 0 - 20)
+  // ==========================================
+  const wipe1 = spring({ frame: frame - 0, fps, config: { damping: 18, mass: 1.1, stiffness: 70 } });
+  const wipe2 = spring({ frame: frame - 4, fps, config: { damping: 18, mass: 1.1, stiffness: 70 } });
+  const wipeX1 = interpolate(wipe1, [0, 1], [0, 3200]);
+  const wipeX2 = interpolate(wipe2, [0, 1], [0, 3200]);
 
-  const imageScale = spring({
-    frame: frame - 25,
-    fps,
-    config: { damping: 14, mass: 0.8 },
-  });
+  // ==========================================
+  // 2. Acto 1: Ilustración (Frames 10 - 32)
+  // ==========================================
+  const imgOpacity = interpolate(frame, [10, 24], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const imgScaleSpring = spring({ frame: frame - 10, fps, config: { damping: 12, mass: 0.7 } });
+  const imgScale = interpolate(imgScaleSpring, [0, 1], [0.85, 1]);
+  // Flotación sutil orgánica una vez asentada
+  const imgFloat = frame > 25 ? Math.sin((frame - 25) / 14) * 6 : 0;
 
-  const buttonScale = spring({
-    frame: frame - 35,
-    fps,
-    config: { damping: 12 },
-  });
+  // ==========================================
+  // 3. Acto 2: Titular Contextual (Frames 24 - 44)
+  // ==========================================
+  const headingOpacity = interpolate(frame, [24, 38], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const headingY = interpolate(frame, [24, 38], [28, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  const urlOpacity = interpolate(frame, [50, 70], [0, 1], { extrapolateRight: "clamp" });
+  // ==========================================
+  // 4. Acto 3: Hero Promo Block (Frames 44 - 75)
+  // ==========================================
+  const promoScaleSpring = spring({ frame: frame - 44, fps, config: { damping: 10, mass: 0.65, stiffness: 120 } });
+  const promoScale = interpolate(promoScaleSpring, [0, 1], [0.82, 1]);
+  const promoOpacity = interpolate(frame, [44, 52], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  // Contador 0→5 con spring — antes el "5" aparecía ya escrito, sin ningún golpe de atención.
-  const countProgress = spring({ frame: frame - 40, fps, config: { damping: 12, mass: 0.6 } });
+  // Contador dinámico 0 -> 5
+  const countProgress = spring({ frame: frame - 48, fps, config: { damping: 11, mass: 0.55, stiffness: 85 } });
   const countValue = Math.min(5, Math.round(interpolate(countProgress, [0, 1], [0, 5])));
-  const countGlow = interpolate(countProgress, [0, 0.6, 1], [0, 1, 0.6], { extrapolateRight: "clamp" });
   
-  // Fade Out at the very end (last 20 frames)
-  const finalFadeOut = interpolate(frame, [160, 180], [1, 0], { extrapolateRight: "clamp" });
+  // Destello de impacto verde cuando alcanza el 5 (alrededor de frame 62)
+  const glowBurst = interpolate(frame, [60, 66, 85], [0, 1, 0.4], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  // Wipe In Logic (starts covering the screen, then sweeps away to the right)
-  const wipe1 = spring({ frame: frame - 0, fps, config: { damping: 18, mass: 1.2, stiffness: 60 } }); // Black moves out first
-  const wipe2 = spring({ frame: frame - 5, fps, config: { damping: 18, mass: 1.2, stiffness: 60 } }); // Green follows
-  const wipeX1 = interpolate(wipe1, [0, 1], [0, 3000]);
-  const wipeX2 = interpolate(wipe2, [0, 1], [0, 3000]);
+  // Subtexto de la promo
+  const subPromoOpacity = interpolate(frame, [58, 68], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const subPromoY = interpolate(frame, [58, 68], [15, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+  // ==========================================
+  // 5. Acto 4: Botón CTA (Frames 72 - 96)
+  // ==========================================
+  const ctaScaleSpring = spring({ frame: frame - 72, fps, config: { damping: 10, mass: 0.6, stiffness: 130 } });
+  const ctaScale = interpolate(ctaScaleSpring, [0, 1], [0.78, 1]);
+  const ctaOpacity = interpolate(frame, [72, 80], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  
+  // Pulso rítmico de atención en el CTA
+  const ctaPulse = frame > 85 ? (Math.sin((frame - 85) / 7) + 1) / 2 : 0;
+  const ctaGlowSpread = 25 + ctaPulse * 22;
+
+  // ==========================================
+  // 6. Acto 5: Ancla de Marca & URL (Frames 92 - 120)
+  // ==========================================
+  const brandOpacity = interpolate(frame, [92, 106], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const brandY = interpolate(frame, [92, 106], [20, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+  const urlOpacity = interpolate(frame, [104, 118], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const urlTracking = interpolate(frame, [104, 120], [0.22, 0.1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+  // ==========================================
+  // 7. Cierre cinematográfico (Fade out final)
+  // ==========================================
+  const finalFadeOut = interpolate(frame, [160, 180], [1, 0], { extrapolateRight: "clamp" });
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#0f0c21", overflow: "hidden", color: "white", fontFamily: "'Poppins', sans-serif", opacity: finalFadeOut }}>
       
-      <div style={{ opacity: contentOpacity, transform: `translateY(${contentY}px)`, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", padding: "0 80px", textAlign: "center" }}>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100%", padding: "0 80px", textAlign: "center" }}>
         
-        {/* Narrative Illustration (Connection) - Adjust size for more breathing room */}
-        <div style={{ width: 750, height: 750, marginBottom: 20, position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        {/* 1. Narrative Illustration con flotación escalonada */}
+        <div style={{ 
+          width: 580, 
+          height: 580, 
+          marginBottom: 15, 
+          position: "relative", 
+          display: "flex", 
+          justifyContent: "center", 
+          alignItems: "center",
+          opacity: imgOpacity,
+          transform: `scale(${imgScale}) translateY(${imgFloat}px)`
+        }}>
           <Img
             src={staticFile("como-funciona-3.webp")}
             style={{
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              transform: `scale(${imageScale})`,
               WebkitMaskImage: "radial-gradient(circle at center, black 45%, transparent 80%)",
               maskImage: "radial-gradient(circle at center, black 45%, transparent 80%)"
             }}
           />
         </div>
 
-        {/* Heading */}
-        <h2 style={{ fontSize: 58, margin: 0, fontWeight: 600, letterSpacing: "-0.01em", lineHeight: 1.25, color: "#a5a2c4", padding: "0 10px" }}>
+        {/* 2. Heading: entra suavemente de abajo hacia arriba */}
+        <h2 style={{ 
+          fontSize: 52, 
+          margin: 0, 
+          fontWeight: 600, 
+          letterSpacing: "-0.01em", 
+          lineHeight: 1.25, 
+          color: "#a5a2c4", 
+          padding: "0 10px",
+          opacity: headingOpacity,
+          transform: `translateY(${headingY}px)`
+        }}>
           Habla en tiempo real y encuentra la respuesta que necesitas.
         </h2>
         
-        {/* Massive Free Promo Block */}
+        {/* 3. Hero Promo Block: golpe visual con contador elástico */}
         <div style={{ 
           display: "flex", 
           flexDirection: "column", 
           alignItems: "center", 
           justifyContent: "center", 
-          marginTop: 40, 
-          backgroundColor: "rgba(98, 209, 119, 0.12)",
+          marginTop: 30, 
+          backgroundColor: `rgba(98, 209, 119, ${0.12 + glowBurst * 0.08})`,
           border: "5px solid #62d177",
           borderRadius: 40,
-          padding: "35px 70px",
-          boxShadow: "0 0 50px rgba(98, 209, 119, 0.2)",
-          transform: `scale(${buttonScale})`
+          padding: "25px 60px",
+          boxShadow: `0 0 ${40 + glowBurst * 40}px rgba(98, 209, 119, ${0.25 + glowBurst * 0.35})`,
+          opacity: promoOpacity,
+          transform: `scale(${promoScale})`
         }}>
           <h3 style={{
-            fontSize: 90,
+            fontSize: 82,
             color: "#62d177",
             margin: 0,
             fontWeight: 800,
             letterSpacing: "-0.02em",
             textTransform: "uppercase",
-            textShadow: `0 0 ${25 + countGlow * 25}px rgba(98, 209, 119, ${0.5 + countGlow * 0.3})`
+            textShadow: `0 0 ${20 + glowBurst * 35}px rgba(98, 209, 119, ${0.6 + glowBurst * 0.4})`
           }}>
             ¡{countValue} Minutos Gratis!
           </h3>
-          <p style={{ fontSize: 46, margin: 0, marginTop: 10, color: "#ffffff", fontWeight: 500 }}>
+          <p style={{ 
+            fontSize: 40, 
+            margin: 0, 
+            marginTop: 10, 
+            color: "#ffffff", 
+            fontWeight: 500,
+            opacity: subPromoOpacity,
+            transform: `translateY(${subPromoY}px)`
+          }}>
             Para tu primera consulta
           </p>
         </div>
 
-        {/* CTA Button */}
+        {/* 4. CTA Button: emerge con rebote y pulso de atención */}
         <div style={{
-          marginTop: 50,
+          marginTop: 40,
           backgroundColor: "#62d177",
           color: "#0f0c21",
-          fontSize: 52,
+          fontSize: 48,
           fontWeight: 700,
-          padding: "25px 80px",
+          padding: "20px 70px",
           borderRadius: "100px",
-          boxShadow: "0 10px 30px rgba(98, 209, 119, 0.4)",
-          transform: `scale(${buttonScale})`
+          boxShadow: `0 10px ${ctaGlowSpread}px rgba(98, 209, 119, ${0.4 + ctaPulse * 0.25})`,
+          opacity: ctaOpacity,
+          transform: `scale(${ctaScale})`
         }}>
           Quiero mis minutos gratis
         </div>
 
-        {/* Animated Logo and URL prominently at the bottom — URL corta, va directo a la landing
-            de la promo (/primera-consulta-gratis, con redirect de zenderu.com/gratis + UTM), no
-            al home genérico: antes el CTA prometía la promo pero la URL no la mencionaba. */}
-        <div style={{ marginTop: 80, display: "flex", flexDirection: "column", alignItems: "center" }}>
-           <AnimatedLogo width={400} variant="full" />
+        {/* 5. Animated Logo & URL de anclaje */}
+        <div style={{ 
+          marginTop: 55, 
+          display: "flex", 
+          flexDirection: "column", 
+          alignItems: "center",
+          opacity: brandOpacity,
+          transform: `translateY(${brandY}px)`
+        }}>
+           <AnimatedLogo width={350} variant="full" />
            <p style={{
-               fontSize: 46,
-               marginTop: 25,
+               fontSize: 42,
+               marginTop: 20,
                marginBottom: 0,
                color: "#62d177",
                fontWeight: 600,
-               letterSpacing: "0.1em",
+               letterSpacing: `${urlTracking}em`,
                opacity: urlOpacity
            }}>
              zenderu.com/gratis
@@ -137,10 +206,9 @@ export const Outro: React.FC = () => {
 
       </div>
 
-      {/* Cortinilla de Entrada (Wipe In, Left to Right) */}
-      {/* WipeX2 (Green) reveals the video beneath it, WipeX1 (Black) reveals the Green beneath it */}
-      <div style={{ position: "absolute", zIndex: 100, width: "200%", height: "200%", top: "-50%", left: "-20%", backgroundColor: "#62d177", transform: `translateX(${wipeX2}px) rotate(15deg)` }} />
-      <div style={{ position: "absolute", zIndex: 101, width: "200%", height: "200%", top: "-50%", left: "-20%", backgroundColor: "#0f0c21", transform: `translateX(${wipeX1}px) rotate(15deg)` }} />
+      {/* Cortinilla dinámica de entrada (Wipe In de izquierda a derecha) */}
+      <div style={{ position: "absolute", zIndex: 100, width: "220%", height: "220%", top: "-60%", left: "-20%", backgroundColor: "#62d177", transform: `translateX(${wipeX2}px) rotate(15deg)` }} />
+      <div style={{ position: "absolute", zIndex: 101, width: "220%", height: "220%", top: "-60%", left: "-20%", backgroundColor: "#0f0c21", transform: `translateX(${wipeX1}px) rotate(15deg)` }} />
 
     </AbsoluteFill>
   );

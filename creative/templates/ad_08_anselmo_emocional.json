@@ -1,0 +1,22 @@
+{
+  "id": "AD_08",
+  "name": "Anselmo Emocional Quote",
+  "archetype": "Confrontación Serena & Reencuadre Vital",
+  "character": "Anselmo Quantum",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 15,
+  "style": "expert_direct_camera_cinematic",
+  "positioning_rules": "Focus on deep personal clarity and psychological reframing.",
+  "hook": "La señal que estás esperando no va a llegar de afuera; empieza cuando decides mirar hacia adentro.",
+  "epiphany": "A veces solo necesitas una conversación honesta con alguien que vea tu situación sin juzgarte.",
+  "cta": "Hablemos en tiempo real. Entra a Zenderu y recibe tus 5 minutos gratis.",
+  "visual_treatment": {
+    "shot": "Tight close-up, calm grounded delivery, soft cinematic bokeh",
+    "subtitles": "Highlighted word-by-word with #62D177 neon mint color"
+  },
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

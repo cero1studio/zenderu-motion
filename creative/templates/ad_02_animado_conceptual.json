@@ -1,0 +1,28 @@
+{
+  "id": "AD_02",
+  "name": "Animado Conceptual (Inner Tech)",
+  "archetype": "Patrones & Desbloqueo Consciente",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 15,
+  "style": "conceptual_matte_purple_neon",
+  "hook": "¿Por qué sigues viviendo el mismo problema con distintas personas?",
+  "epiphany": "No es mala suerte ni casualidad; tu mente repite arquetipos inconscientes hasta que aprendes a verlos.",
+  "cta": "Descifra tus patrones en vivo con un Guía Zenderu. ¡5 Minutos Gratis en tu primera consulta!",
+  "visual_treatment": {
+    "background": "#0f0c21",
+    "character": "Faceless minimalist 3D silhouette in matte deep purple #252151",
+    "accent_luminescence": "Neon mint green beam #62d177",
+    "text_color": "#ffffff and #a5a2c4"
+  },
+  "nano_banana_prompts": {
+    "scene_1": "Minimalist 3D render, dark void background #0f0c21, faceless matte purple silhouette #252151 standing still amidst floating chaotic geometry, clean Octane lighting, vertical 9:16",
+    "scene_2": "Matte purple silhouette walks forward as chaotic geometry aligns into an organized glowing neon mint path #62d177 on the floor, inner tech aesthetic, vertical 9:16",
+    "scene_3": "Perspective view of the silhouette walking toward a serene luminous mint beacon of light, serene clarity, minimalist high-end design, vertical 9:16"
+  },
+  "outro": {
+    "include_official_outro": true,
+    "heading": "Habla en tiempo real y encuentra la respuesta que necesitas.",
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

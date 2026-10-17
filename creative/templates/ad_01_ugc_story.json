@@ -1,0 +1,41 @@
+{
+  "id": "AD_01",
+  "name": "UGC Testimonial / Story",
+  "archetype": "Validación & Desahogo Real",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 15,
+  "style": "ugc_selfie_camera",
+  "hook": "No le podía contar esto a nadie de mi círculo sin que me juzgaran.",
+  "epiphany": "Encontré un Guía en Zenderu que me escuchó en vivo y me dio la perspectiva clara que necesitaba.",
+  "cta": "Habla en tiempo real por chat o llamada. ¡Primeros 5 minutos gratis!",
+  "visual_treatment": {
+    "lighting": "Natural daylight / room ambient",
+    "framing": "Front-facing selfie phone camera, authentic UGC look",
+    "subtitles": "Dynamic burned-in text at lower-third, bold white with #62D177 neon word highlight"
+  },
+  "scenes": [
+    {
+      "order": 1,
+      "time_range": "0.0s - 4.0s",
+      "voiceover": "Llevaba semanas con este nudo en la garganta y sin saber qué decisión tomar.",
+      "visual": "Protagonist speaking directly to phone camera in relaxed room setting"
+    },
+    {
+      "order": 2,
+      "time_range": "4.0s - 8.5s",
+      "voiceover": "Entré a Zenderu, elegí a mi Guía y en dos minutos ya estábamos hablando en privado.",
+      "visual": "Brief screen overlay of Zenderu guide selection / chat connection"
+    },
+    {
+      "order": 3,
+      "time_range": "8.5s - 12.0s",
+      "voiceover": "No fue magia ni adivinación, fue claridad pura para saber qué paso dar.",
+      "visual": "Relieved, empowered smile, genuine emotion"
+    }
+  ],
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

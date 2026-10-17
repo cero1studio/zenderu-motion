@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+  <title>Zenderu Chat Consultation - 9:16 Broadcast Mockup</title>
+  <style>
+    :root {
+      --bg-dark: #0a0818;
+      --bg-surface: #120e2e;
+      --bg-card: #1b1642;
+      --brand-purple: #252151;
+      --brand-mint: #62d177;
+      --mint-glow: rgba(98, 209, 119, 0.35);
+      --text-main: #f3f0ff;
+      --text-muted: #8b85b2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Outfit", Roboto, sans-serif;
+    }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      background: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 15%, #231c54 0%, #0a0818 70%);
+      color: var(--text-main);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Glows */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glow-1 { top: 100px; right: -50px; width: 450px; height: 450px; background: rgba(98, 209, 119, 0.12); }
+    .glow-2 { bottom: 250px; left: -100px; width: 600px; height: 600px; background: rgba(37, 33, 81, 0.4); }
+
+    /* Top Safe Area & App Header */
+    .app-header {
+      position: relative;
+      z-index: 10;
+      padding: 90px 48px 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(10, 8, 24, 0.7);
+      backdrop-filter: blur(30px);
+    }
+
+    .guide-info {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+    }
+
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 3px solid var(--brand-mint);
+      box-shadow: 0 0 25px var(--mint-glow);
+      object-fit: cover;
+      background: #252151;
+    }
+
+    .online-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      width: 26px;
+      height: 26px;
+      background: var(--brand-mint);
+      border-radius: 50%;
+      border: 4px solid var(--bg-dark);
+      box-shadow: 0 0 12px var(--brand-mint);
+    }
+
+    .guide-text h2 {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .guide-text p {
+      font-size: 24px;
+      color: var(--brand-mint);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    .header-balance {
+      background: rgba(37, 33, 81, 0.6);
+      border: 1px solid rgba(98, 209, 119, 0.3);
+      padding: 16px 28px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-balance .zens-val {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--brand-mint);
+    }
+
+    .header-balance .zens-lbl {
+      font-size: 20px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Chat Thread */
+    .chat-container {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      justify-content: flex-end;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 28px 36px;
+      border-radius: 36px;
+      font-size: 32px;
+      line-height: 1.45;
+      animation: messageIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    @keyframes messageIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .client-msg {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #372f77 0%, #252151 100%);
+      color: #fff;
+      border-bottom-right-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation-delay: 0.3s;
+    }
+
+    .guide-msg {
+      align-self: flex-start;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom-left-radius: 8px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+      animation-delay: 2.4s;
+    }
+
+    .highlight-mint {
+      color: var(--brand-mint);
+      font-weight: 600;
+    }
+
+    /* Typing Indicator */
+    .typing-box {
+      align-self: flex-start;
+      background: var(--bg-surface);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 22px 34px;
+      border-radius: 36px;
+      border-bottom-left-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: typingFade 2s ease-in-out forwards;
+      animation-delay: 1.0s;
+      opacity: 0;
+    }
+
+    @keyframes typingFade {
+      0% { opacity: 0; transform: translateY(20px); }
+      15% { opacity: 1; transform: translateY(0); }
+      85% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-10px); display: none; }
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      background: var(--brand-mint);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite ease-in-out;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1.1); opacity: 1; }
+    }
+
+    /* Audio Message Card */
+    .audio-card {
+      align-self: flex-start;
+      background: #17123d;
+      border: 1.5px solid rgba(98, 209, 119, 0.3);
+      padding: 28px 36px;
+      border-radius: 36px;
+      border-bottom-left-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      width: 75%;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+      animation: messageIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: 4.2s;
+      opacity: 0;
+    }
+
+    .play-btn {
+      width: 72px;
+      height: 72px;
+      background: var(--brand-mint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px var(--mint-glow);
+    }
+
+    .play-btn svg {
+      width: 32px;
+      height: 32px;
+      fill: #0a0818;
+      margin-left: 4px;
+    }
+
+    .wave-bars {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      height: 48px;
+    }
+
+    .bar {
+      width: 6px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      height: 20px;
+    }
+    .bar.active {
+      background: var(--brand-mint);
+      animation: wave 1s ease-in-out infinite alternate;
+    }
+    .bar:nth-child(2) { animation-delay: 0.1s; }
+    .bar:nth-child(3) { animation-delay: 0.3s; }
+    .bar:nth-child(4) { animation-delay: 0.2s; }
+    .bar:nth-child(5) { animation-delay: 0.4s; }
+    .bar:nth-child(6) { animation-delay: 0.25s; }
+
+    @keyframes wave {
+      0% { height: 16px; }
+      100% { height: 46px; }
+    }
+
+    .audio-duration {
+      font-size: 24px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Bottom Input Bar */
+    .input-bar {
+      position: relative;
+      z-index: 10;
+      padding: 36px 48px 90px 48px;
+      background: rgba(10, 8, 24, 0.9);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .fake-input {
+      flex: 1;
+      background: #151136;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 24px 32px;
+      border-radius: 999px;
+      font-size: 28px;
+      color: var(--text-muted);
+    }
+
+    .send-btn {
+      width: 80px;
+      height: 80px;
+      background: var(--brand-mint);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px var(--mint-glow);
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="guide-info">
+      <div class="avatar-wrapper">
+        <div class="avatar" style="background: #252151 url('../assets/branding/guide_hero.webp') center/cover;"></div>
+        <div class="online-badge"></div>
+      </div>
+      <div class="guide-text">
+        <h2>Guía Anselmo <svg width="28" height="28" viewBox="0 0 24 24" fill="#62d177"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></h2>
+        <p>Enfoque: Decodificación de Patrones</p>
+      </div>
+    </div>
+    <div class="header-balance">
+      <span class="zens-val">45.0</span>
+      <span class="zens-lbl">Zens</span>
+    </div>
+  </header>
+
+  <!-- Chat Content -->
+  <main class="chat-container">
+    <div class="message client-msg">
+      Siento que repito la misma indecisión una y otra vez... ¿cómo salgo de este bucle?
+    </div>
+
+    <div class="typing-box">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <div class="message guide-msg">
+      No estás estancado por falta de opciones, sino porque <span class="highlight-mint">buscas certeza absoluta</span> antes de dar el primer paso. Escucha esto:
+    </div>
+
+    <div class="audio-card">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="wave-bars">
+        <div class="bar active"></div>
+        <div class="bar active"></div>
+        <div class="bar active"></div>
+        <div class="bar active"></div>
+        <div class="bar active"></div>
+        <div class="bar active"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="audio-duration">0:42</div>
+    </div>
+  </main>
+
+  <!-- Input Bar -->
+  <footer class="input-bar">
+    <div class="fake-input">Escribe tu consulta confidencial...</div>
+    <div class="send-btn">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="#0a0818"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "id": "AD_05",
+  "name": "Animado Señal en el Camino 5Min",
+  "archetype": "Despertar & Orientación Inmediata",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 16.7,
+  "style": "conceptual_matte_purple_neon",
+  "best_performer": true,
+  "hook": "¿Sientes que estás atrapado en un ciclo que no entiendes?",
+  "epiphany": "No es mala suerte, es una señal que no has aprendido a leer.",
+  "cta": "Un Guía Zenderu puede ayudarte a encontrar el camino. ¡5 Minutos Gratis en tu primera consulta!",
+  "narrative": {
+    "act_1": {
+      "time": "0.0s - 3.75s",
+      "text": "¿Sientes que estás atrapado en un ciclo que no entiendes?",
+      "visual": "Faceless matte purple silhouette #252151 wandering slowly in infinite dark void #0f0c21"
+    },
+    "act_2": {
+      "time": "3.75s - 7.50s",
+      "text": "No es mala suerte, es una señal que no has aprendido a leer.",
+      "visual": "Luminous mint green path #62d177 lights up beneath silhouette steps, untangling chaotic threads"
+    },
+    "act_3": {
+      "time": "7.50s - 10.70s",
+      "text": "Un Guía Zenderu puede ayudarte a encontrar el camino.",
+      "visual": "Silhouette strides with confidence toward glowing modern tech portal"
+    },
+    "outro": {
+      "time": "10.70s - 16.70s",
+      "heading": "Habla en tiempo real y encuentra la respuesta que necesitas.",
+      "counter_start": 0,
+      "counter_end": 5,
+      "promo_badge": "¡5 Minutos Gratis! Para tu primera consulta",
+      "cta_button": "Quiero mis minutos gratis",
+      "brand_anchor": "zenderu.com/gratis"
+    }
+  },
+  "audio_rules": {
+    "body_audio": "Single clean voiceover with native subtle bed normalized to -16 LUFS (zero double background music)",
+    "outro_sfx": "Call connected whoosh (0.035) -> Tip received chime (0.035) -> Chat message pop (0.03)",
+    "outro_fade": "Both chime ring and ambient rhythm fade out in unison from frame 130 to 172"
+  }
+}

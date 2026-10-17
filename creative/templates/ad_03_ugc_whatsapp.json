@@ -1,0 +1,39 @@
+{
+  "id": "AD_03",
+  "name": "UGC Conversación en Tiempo Real",
+  "archetype": "Inmediatez & Chat Confidencial",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 15,
+  "style": "chat_ui_mockup",
+  "hook": "Eran las 11 PM y sentía que no podía esperar a mañana para entender qué hacer.",
+  "epiphany": "Abrí Zenderu, le escribí a mi Guía y me respondió en menos de 30 segundos.",
+  "cta": "Inicia tu conversación ahora. Sin citas ni esperas. ¡5 Minutos Gratis!",
+  "visual_treatment": {
+    "phone_frame": "Clean iPhone bezel with dark mode messaging interface",
+    "bubble_client": "#252151 matte dark purple bubble",
+    "bubble_guide": "#17122b card background with #62d177 neon accent line",
+    "sound_effects": "Subtle tactile keystroke ticks + pop on incoming message"
+  },
+  "dialogue": [
+    {
+      "sender": "client",
+      "text": "Siento que me autosaboteo cada vez que las cosas van bien...",
+      "time": "0.5s"
+    },
+    {
+      "sender": "guide",
+      "text": "No es autosabotaje, es tu zona de confort protegiéndote de lo desconocido. Analicemos el disparador.",
+      "time": "3.5s"
+    },
+    {
+      "sender": "client",
+      "text": "Dios... nadie me lo había explicado así de claro.",
+      "time": "7.5s"
+    }
+  ],
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

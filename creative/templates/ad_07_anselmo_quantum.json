@@ -1,0 +1,22 @@
+{
+  "id": "AD_07",
+  "name": "Anselmo Quantum Quote (Algoritmo de Decisiones)",
+  "archetype": "Arquetipos & Decodificación de Patrones",
+  "character": "Anselmo Quantum",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 15,
+  "style": "expert_direct_camera_cinematic",
+  "positioning_rules": "NEVER use the word tarot or adivinación. Focus on archetype interpretation and behavioral patterns.",
+  "hook": "No estás bloqueado: estás atrapado en un bucle de decisiones que aún no haces consciente.",
+  "epiphany": "Cuando descifras el arquetipo que está guiando tu miedo, la salida se vuelve obvia.",
+  "cta": "Conversemos en vivo ahora mismo en Zenderu. ¡Tus primeros 5 minutos son gratis!",
+  "visual_treatment": {
+    "shot": "Medium close-up to close-up, warm cinematic studio background, sharp eye focus",
+    "color_grade": "iPhone high-fidelity grade (vibrance 0.10, cas 0.45, warm balanced midtones)"
+  },
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

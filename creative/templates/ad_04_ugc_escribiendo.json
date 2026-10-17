@@ -1,0 +1,21 @@
+{
+  "id": "AD_04",
+  "name": "UGC Escribiendo y Borrando iOS",
+  "archetype": "Desahogo & Superación del Miedo",
+  "aspect_ratio": "9:16",
+  "recommended_duration_s": 15,
+  "style": "ios_keyboard_screen_recording",
+  "hook": "Cuántas veces escribes lo que sientes... y lo borras por miedo a lo que piensen.",
+  "epiphany": "En Zenderu tienes un espacio privado donde hablar sin filtros y recibir orientación real.",
+  "cta": "Tus primeros 5 minutos son gratis. Encuentra la claridad hoy.",
+  "visual_treatment": {
+    "screen": "Close-up of iOS typing input field, cursor blinking, rapid delete backspace animation",
+    "lighting": "Late-night screen glow, intimate atmosphere",
+    "transition": "Sting cortinilla to Zenderu secure connection"
+  },
+  "outro": {
+    "include_official_outro": true,
+    "promo_text": "¡5 Minutos Gratis!",
+    "url": "zenderu.com/gratis"
+  }
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+  <title>Zenderu Live Call - 9:16 Broadcast Mockup</title>
+  <style>
+    :root {
+      --bg-dark: #070514;
+      --brand-purple: #252151;
+      --brand-mint: #62d177;
+      --mint-glow: rgba(98, 209, 119, 0.45);
+      --text-main: #f3f0ff;
+      --text-muted: #8b85b2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Outfit", Roboto, sans-serif;
+    }
+
+    body {
+      width: 1080px;
+      height: 1920px;
+      background: var(--bg-dark);
+      background-image: radial-gradient(circle at 50% 38%, #20184c 0%, #070514 75%);
+      color: var(--text-main);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 140px 60px 140px 60px;
+      position: relative;
+    }
+
+    /* Ambient Pulsing Rings */
+    .pulse-container {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(98, 209, 119, 0.25);
+      animation: pulseExpand 3s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    .ring-1 { width: 380px; height: 380px; animation-delay: 0s; }
+    .ring-2 { width: 520px; height: 520px; animation-delay: 0.9s; }
+    .ring-3 { width: 680px; height: 680px; animation-delay: 1.8s; }
+
+    @keyframes pulseExpand {
+      0% { transform: scale(0.8); opacity: 0.8; border-color: rgba(98, 209, 119, 0.6); }
+      100% { transform: scale(1.35); opacity: 0; border-color: rgba(98, 209, 119, 0); }
+    }
+
+    /* Top Status & Guide Info */
+    .call-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      z-index: 10;
+    }
+
+    .badge-status {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(98, 209, 119, 0.12);
+      border: 1px solid rgba(98, 209, 119, 0.4);
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--brand-mint);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--brand-mint);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--brand-mint);
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .call-title {
+      font-size: 54px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-top: 10px;
+    }
+
+    .call-subtitle {
+      font-size: 28px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* Center Avatar with Live Glow */
+    .avatar-center-wrapper {
+      position: relative;
+      z-index: 10;
+      width: 320px;
+      height: 320px;
+      margin-top: 40px;
+    }
+
+    .avatar-center {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 4px solid var(--brand-mint);
+      box-shadow: 0 0 60px var(--mint-glow), 0 0 120px rgba(37, 33, 81, 0.8);
+      background: #252151 url('../assets/branding/guide_hero.webp') center/cover;
+    }
+
+    /* Live Timer & Waveform */
+    .call-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      z-index: 10;
+      margin-top: -20px;
+    }
+
+    .call-timer {
+      font-size: 64px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: #ffffff;
+      letter-spacing: 2px;
+    }
+
+    .voice-meter {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 60px;
+    }
+
+    .meter-bar {
+      width: 8px;
+      background: var(--brand-mint);
+      border-radius: 999px;
+      box-shadow: 0 0 15px var(--mint-glow);
+      animation: voicePulse 1.2s infinite ease-in-out alternate;
+    }
+    .meter-bar:nth-child(1) { height: 20px; animation-delay: 0.1s; }
+    .meter-bar:nth-child(2) { height: 35px; animation-delay: 0.3s; }
+    .meter-bar:nth-child(3) { height: 55px; animation-delay: 0.15s; }
+    .meter-bar:nth-child(4) { height: 40px; animation-delay: 0.4s; }
+    .meter-bar:nth-child(5) { height: 25px; animation-delay: 0.25s; }
+    .meter-bar:nth-child(6) { height: 48px; animation-delay: 0.35s; }
+    .meter-bar:nth-child(7) { height: 18px; animation-delay: 0.05s; }
+
+    @keyframes voicePulse {
+      0% { transform: scaleY(0.4); opacity: 0.5; }
+      100% { transform: scaleY(1.3); opacity: 1; }
+    }
+
+    /* Bottom Actions Bar */
+    .call-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      z-index: 10;
+      width: 100%;
+    }
+
+    .action-btn {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: rgba(37, 33, 81, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .action-btn svg {
+      width: 44px;
+      height: 44px;
+      fill: #ffffff;
+    }
+
+    .btn-end {
+      background: #e53935;
+      border: none;
+      box-shadow: 0 0 35px rgba(229, 57, 53, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <!-- Ambient Rings -->
+  <div class="pulse-container">
+    <div class="pulse-ring ring-1"></div>
+    <div class="pulse-ring ring-2"></div>
+    <div class="pulse-ring ring-3"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="call-header">
+    <div class="badge-status">
+      <div class="status-dot"></div>
+      Llamada de Audio en Vivo
+    </div>
+    <h1 class="call-title">Guía Zenderu Anselmo</h1>
+    <p class="call-subtitle">Sesión Confidencial de Claridad</p>
+  </header>
+
+  <!-- Avatar -->
+  <div class="avatar-center-wrapper">
+    <div class="avatar-center"></div>
+  </div>
+
+  <!-- Meta & Timer -->
+  <div class="call-meta">
+    <div class="call-timer" id="timer">04:18</div>
+    <div class="voice-meter">
+      <div class="meter-bar"></div>
+      <div class="meter-bar"></div>
+      <div class="meter-bar"></div>
+      <div class="meter-bar"></div>
+      <div class="meter-bar"></div>
+      <div class="meter-bar"></div>
+      <div class="meter-bar"></div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="call-actions">
+    <div class="action-btn">
+      <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+    </div>
+    <div class="action-btn btn-end">
+      <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.74-1.69-1.36-2.67-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+    </div>
+    <div class="action-btn">
+      <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    </div>
+  </div>
+
+  <script>
+    let seconds = 258;
+    setInterval(() => {
+      seconds++;
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      document.getElementById('timer').textContent = `${m}:${s}`;
+    }, 1000);
+  </script>
+</body>
+</html>
