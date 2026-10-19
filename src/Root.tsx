@@ -115,7 +115,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="ThumbStella" component={YoutubeThumbnail} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ expertName: "Stella Moons", phraseWhite: "Rompe tus", phraseGreen: "ciclos tóxicos", imageSrc: "Stella_Thumbnail.jpg" }} />
       <Composition id="ThumbAnselmo" component={YoutubeThumbnail} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ expertName: "Anselmo", phraseWhite: "Suelta el peso", phraseGreen: "del pasado", imageSrc: "Anselmo_Thumbnail.jpg" }} />
       <Composition id="ThumbVioleta" component={YoutubeThumbnail} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ expertName: "Violeta", phraseWhite: "Destraba tu", phraseGreen: "camino", imageSrc: "Violeta_Thumbnail.jpg" }} />
-      <Composition id="ThumbLayla" component={YoutubeThumbnail} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ expertName: "Layla", phraseWhite: "Encuentra claridad", phraseGreen: "en tu camino", imageSrc: "layla_avatar.jpg" }} />
+      <Composition id="ThumbLayla" component={YoutubeThumbnail} durationInFrames={1} fps={30} width={1080} height={1920} defaultProps={{ expertName: "Layla", phraseWhite: "Encuentra claridad", phraseGreen: "en tu camino", imageSrc: "Layla_Thumbnail.jpg" }} />
       <Composition id="ZenderuStellaAd" component={StellaAd} durationInFrames={53 * 30} fps={30} width={1080} height={1920} />
       <Composition id="ZenderuVioletaAd" component={Expert3Ad} durationInFrames={46 * 30} fps={30} width={1080} height={1920} />
       <Composition id="ZenderuAnselmoAd" component={AnselmoAd} durationInFrames={70 * 30} fps={30} width={1080} height={1920} />
