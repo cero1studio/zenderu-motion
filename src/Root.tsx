@@ -119,7 +119,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="ZenderuStellaAd" component={StellaAd} durationInFrames={53 * 30} fps={30} width={1080} height={1920} />
       <Composition id="ZenderuVioletaAd" component={Expert3Ad} durationInFrames={46 * 30} fps={30} width={1080} height={1920} />
       <Composition id="ZenderuAnselmoAd" component={AnselmoAd} durationInFrames={70 * 30} fps={30} width={1080} height={1920} />
-      <Composition id="ZenderuLaylaAd" component={LaylaAd} durationInFrames={1620} fps={30} width={1080} height={1920} />
+      <Composition id="ZenderuLaylaAd" component={LaylaAd} durationInFrames={1710} fps={30} width={1080} height={1920} />
       <Composition
         id="ZenderuUGCSearchContactAd"
         component={UGCSearchContactAd}
